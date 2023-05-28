@@ -1,6 +1,7 @@
 <assignment statement> = <identifier> ":=" <expression>
 
-<expression> = <simple expression> | <simple expression> <relational operator> <simple expression> ]
+<expression> = <simple expression> <expression refactoring>
+<expression refactoring> = <relational operator> <simple expression> | <empty>
 
 <simple expression> = [ <sign> ] <term> { <adding operator> <term> }
 
