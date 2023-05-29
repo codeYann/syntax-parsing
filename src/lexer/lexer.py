@@ -4,14 +4,19 @@ from toolz import pipe
 import re
 
 
+class LexicalError(Exception):
+    pass
+
+
 class Lexer:
     patterns: Dict[str, str] = {
         r"not\b": "NOT_OP",
+        r"div\b": "MUL_OP",
         r"or|and|=|<>|<=|>=|<|>": "RELATIONAL_OP",
         r"[a-zA-Z][a-zA-Z0-9]*": "IDENTIFIER",
         r":=": "ASSIGNMENT",
         r"\+|-": "ADD_OP",
-        r"\*|div": "MUL_OP",
+        r"\*": "MUL_OP",
         r"\d+": "DIGIT",
         r"\(": "LPAREN",
         r"\)": "RPAREN",
@@ -47,7 +52,7 @@ class Lexer:
                 tokens.append(token)
                 remaining_code = remaining_code[longest_match:].lstrip()
             else:
-                raise ValueError(
+                raise LexicalError(
                     f"Lexical Error. Unrecognized input {remaining_code[0]}"
                 )
 
