@@ -70,7 +70,7 @@ class Parser:
             self.match("DIGIT")
         else:
             raise SyntaxError(
-                f"Syntax Error. Unexpected token {self.current_token.token_type}"
+                f"Syntax Error. Unexpected token {self.current_token.value}"
             )
 
     def parse_expression_refactoring(self) -> None:
